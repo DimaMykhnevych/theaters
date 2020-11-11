@@ -19,16 +19,16 @@ namespace TheatersIS.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTheaters()
+        public async Task<IActionResult> GetTheaters([FromQuery] SearchTheraterDTO parameters)
         {
-            var theaters =  _theaterService.GetTheaters();
+            IEnumerable<TheaterDTO> theaters = await _theaterService.SearchTheaters(parameters);
             return Ok(theaters);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetTheater(int id)
         {
-            var theater =  _theaterService.GetTheater(id);
+            var theater = _theaterService.GetTheater(id);
             if (theater == null)
                 return NotFound();
             return Ok(theater);

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using TheatersIs.BusinessLayer.Mappers;
 using TheatersIs.BusinessLayer.Services.AddressService;
 using TheatersIs.BusinessLayer.Services.TheaterService;
+using TheatersIS.DataLayer.Builders.TheaterN;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Repositories.AddressRepositoryN;
 using TheatersIS.DataLayer.Repositories.OrderRepositoryN;
@@ -35,6 +36,7 @@ namespace TheatersIS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
 
             services.AddDbContext<TheaterDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("TheatersDatabase")));
@@ -63,6 +65,7 @@ namespace TheatersIS
             services.AddTransient<IVariantRepository, VariantRepository>();
             services.AddTransient<ITheaterService, TheaterService>();
             services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<ITheaterSearchQueryBuilder, TheaterSearchQueryBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +87,8 @@ namespace TheatersIS
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseAuthorization();
 

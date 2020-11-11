@@ -13,5 +13,6 @@ namespace TheatersIs.BusinessLayer.Services.TheaterService
         TheaterDTO AddTheater(TheaterDTO theater);
         bool DeleteTheater(int id);
         Task<TheaterDTO> UpdateTheater(int id, TheaterDTO theaterDTO);
+        Task<IEnumerable<TheaterDTO>> SearchTheaters(SearchTheraterDTO parameters);
     }
 }
