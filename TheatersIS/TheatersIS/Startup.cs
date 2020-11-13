@@ -7,7 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheatersIs.BusinessLayer.Mappers;
 using TheatersIs.BusinessLayer.Services.AddressService;
+using TheatersIs.BusinessLayer.Services.PerformanceService;
 using TheatersIs.BusinessLayer.Services.TheaterService;
+using TheatersIS.DataLayer.Builders.PerformanceN;
 using TheatersIS.DataLayer.Builders.TheaterN;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Repositories.AddressRepositoryN;
@@ -63,9 +65,13 @@ namespace TheatersIS
             services.AddTransient<IUserAnswerRepository, UserAnswerRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IVariantRepository, VariantRepository>();
+
             services.AddTransient<ITheaterService, TheaterService>();
             services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IPerformanceService, PerformanceService>();
+
             services.AddTransient<ITheaterSearchQueryBuilder, TheaterSearchQueryBuilder>();
+            services.AddTransient<IPerformanceSearchQueryBuilder, PerformanceSearchQueryBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +94,9 @@ namespace TheatersIS
 
             app.UseRouting();
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthorization();
 

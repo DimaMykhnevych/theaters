@@ -35,7 +35,7 @@ namespace TheatersIS.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTheaterAndAddress(TheaterDTO addTheaterDTO)
+        public IActionResult AddTheaterAndAddress([FromBody]TheaterDTO addTheaterDTO)
         {
             var added = _theaterService.AddTheater(addTheaterDTO);
             if (added == null)
@@ -47,9 +47,7 @@ namespace TheatersIS.Controllers
         public IActionResult DeleteTheater(int id)
         {
             bool deleted = _theaterService.DeleteTheater(id);
-            if (deleted)
-                return Ok();
-            return NotFound();
+            return Ok(deleted);
         }
 
         [HttpPut("{id}")]
