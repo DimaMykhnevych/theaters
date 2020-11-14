@@ -28,5 +28,39 @@ namespace TheatersIS.Controllers
             return Ok(performances);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPerformance(int id)
+        {
+            PerformanceDTO performance = await _performanceService.GetPerformance(id);
+            if (performance == null)
+                return NotFound();
+            return Ok(performance);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPerformance([FromBody] PerformanceDTO performanceDTO)
+        {
+            var added = await _performanceService.AddPerformance(performanceDTO);
+            if (added == null)
+                return BadRequest();
+            return Ok(added);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePerformance(int id)
+        {
+            bool deleted = await _performanceService.DeletePerformance(id);
+            return Ok(deleted);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePerformance(int id, PerformanceDTO performanceDTO)
+        {
+            var updatedPerformance = await _performanceService.UpdatePerformance(id, performanceDTO);
+            if (updatedPerformance == null)
+                return NotFound();
+            return Ok(updatedPerformance);
+        }
+
     }
 }

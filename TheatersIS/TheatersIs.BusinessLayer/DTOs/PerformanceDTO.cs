@@ -20,6 +20,6 @@ namespace TheatersIs.BusinessLayer.DTOs
         public string Author { get; set; }
         public string Composer { get; set; }
 
-        public List<TheaterPerformanceDTO> TheaterPerformances { get; set; }
+        //public List<TheaterPerformanceDTO> TheaterPerformances { get; set; }
     }
 }

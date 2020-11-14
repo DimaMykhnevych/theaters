@@ -24,6 +24,8 @@ namespace TheatersIs.BusinessLayer.Services.PerformanceService
             _query = query;
         }
 
+     
+
         public async Task<PerformanceDTO> GetPerformance(int id)
         {
             Performance performance = _performanceRepository.Get(id);
@@ -35,6 +37,8 @@ namespace TheatersIs.BusinessLayer.Services.PerformanceService
             IEnumerable<Performance> performances = _performanceRepository.GetAll();
             return _mapper.Map<IEnumerable<PerformanceDTO>>(performances);
         }
+
+
 
         public async Task<IEnumerable<PerformanceDTO>> SearchPerformances(SearchPerformanceDTO parameters)
         {
@@ -50,5 +54,36 @@ namespace TheatersIs.BusinessLayer.Services.PerformanceService
 
             return _mapper.Map<IEnumerable<PerformanceDTO>>(performances);
         }
+
+        public async Task<PerformanceDTO> AddPerformance(PerformanceDTO performanceDTO)
+        {
+            Performance performance = _mapper.Map<Performance>(performanceDTO);
+
+            _performanceRepository.Insert(performance);
+            _performanceRepository.Save();
+
+
+            return _mapper.Map<PerformanceDTO>(performance);
+        }
+
+        public async Task<PerformanceDTO> UpdatePerformance(int id, PerformanceDTO performanceDTO)
+        {
+            Performance performance = _mapper.Map<Performance>(performanceDTO);
+            performance.Id = id;
+            await _performanceRepository.UpdateAsync(performance);
+            return _mapper.Map<PerformanceDTO>(performance);
+        }
+
+        public async Task<bool> DeletePerformance(int id)
+        {
+            Performance performanceToDelete = _performanceRepository.Get(id);
+            if (performanceToDelete == null)
+                return false;
+            _performanceRepository.Delete(performanceToDelete);
+            _performanceRepository.Save();
+            return true;
+        }
+
+
     }
 }

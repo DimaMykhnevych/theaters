@@ -29,5 +29,15 @@ namespace TheatersIS.DataLayer.Repositories.PerformanceRepositoryN
                 .ThenInclude(t => t.Address)
                 .ToList();
         }
+
+        public async Task<Performance> UpdateAsync(Performance performance)
+        {
+
+            Context.Update(performance);
+            await Context.SaveChangesAsync();
+
+            return performance;
+
+        }
     }
 }

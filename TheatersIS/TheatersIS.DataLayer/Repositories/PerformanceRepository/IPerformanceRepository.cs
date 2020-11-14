@@ -10,5 +10,7 @@ namespace TheatersIS.DataLayer.Repositories.PerformanceRepositoryN
     {
         Performance GetPerformanceWithTheater(int id);
         IEnumerable<Performance> GetPerformancesWithTheaters();
+
+        Task<Performance> UpdateAsync(Performance performance);
     }
 }
