@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TheatersIs.BusinessLayer.DTOs;
 
 namespace TheatersIs.BusinessLayer.Services.AddressService

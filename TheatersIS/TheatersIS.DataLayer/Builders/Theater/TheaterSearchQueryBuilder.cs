@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Entities;
@@ -56,7 +55,7 @@ namespace TheatersIS.DataLayer.Builders.TheaterN
                 switch (fieldToSort.ToLower())
                 {
                     case "name":
-                        _query = descending ? _query.OrderByDescending(t => t.Name) 
+                        _query = descending ? _query.OrderByDescending(t => t.Name)
                             : _query.OrderBy(t => t.Name);
                         break;
                     case "type":

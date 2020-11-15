@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheatersIs.BusinessLayer.DTOs;
 using TheatersIs.BusinessLayer.Services.AddressService;
 
@@ -57,7 +52,7 @@ namespace TheatersIS.Controllers
         public IActionResult UpdateAddress(int id, AddressDTO addressDTO)
         {
             var updatedAddress = _addressService.UpdateAddress(id, addressDTO);
-            if(updatedAddress == null)
+            if (updatedAddress == null)
                 return NotFound();
             return Ok(updatedAddress);
         }

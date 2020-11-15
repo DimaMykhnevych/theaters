@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Entities;
@@ -29,19 +27,19 @@ namespace TheatersIS.DataLayer.Repositories.TheaterRepositoryN
         public Theater GetTheaterWithAddress(int id)
         {
             return Context.Theaters
-                .Include(t => t.Address).ToList()
-                .Find(t => t.Id == id);
+                .Include(t => t.Address)
+                .FirstOrDefault(tp => tp.Id == id);
         }
 
         public async Task<Theater> UpdateAsync(Theater theater)
         {
 
 
-                Context.Update(theater);
-                await Context.SaveChangesAsync();
+            Context.Update(theater);
+            await Context.SaveChangesAsync();
 
-                return theater;
-            
+            return theater;
+
 
         }
     }

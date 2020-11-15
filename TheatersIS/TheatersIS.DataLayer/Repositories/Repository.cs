@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TheatersIS.DataLayer.DbContextN;
 
 namespace TheatersIS.DataLayer.Repositories
@@ -28,7 +26,7 @@ namespace TheatersIS.DataLayer.Repositories
         {
             Context.Set<TEntity>().Add(entity);
         }
-    
+
         public void Delete(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);

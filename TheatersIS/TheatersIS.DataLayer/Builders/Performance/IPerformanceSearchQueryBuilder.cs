@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TheatersIS.DataLayer.Entities;
+﻿using TheatersIS.DataLayer.Entities;
 
 namespace TheatersIS.DataLayer.Builders.PerformanceN
 {
-    public interface IPerformanceSearchQueryBuilder: IQueryBuilder<Performance>
+    public interface IPerformanceSearchQueryBuilder : IQueryBuilder<Performance>
     {
         IPerformanceSearchQueryBuilder SetBasePerformanceInfo();
         IPerformanceSearchQueryBuilder SetPerformanceName(string name);

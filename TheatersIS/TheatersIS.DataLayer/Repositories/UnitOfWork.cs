@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TheatersIS.DataLayer.DbContextN;
+﻿using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Repositories.AddressRepositoryN;
 using TheatersIS.DataLayer.Repositories.OrderRepositoryN;
 using TheatersIS.DataLayer.Repositories.PerformanceRepositoryN;

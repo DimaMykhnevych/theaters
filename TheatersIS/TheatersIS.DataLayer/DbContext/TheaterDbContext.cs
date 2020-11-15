@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheatersIS.DataLayer.Entities;
 
 namespace TheatersIS.DataLayer.DbContextN
@@ -9,7 +6,7 @@ namespace TheatersIS.DataLayer.DbContextN
     public class TheaterDbContext : DbContext
     {
         public TheaterDbContext(DbContextOptions dbContextOptions)
-            :base(dbContextOptions)
+            : base(dbContextOptions)
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

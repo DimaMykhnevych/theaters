@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TheatersIs.BusinessLayer.DTOs;
 using TheatersIS.DataLayer.Entities;
 using TheatersIS.DataLayer.Repositories.AddressRepositoryN;
@@ -54,7 +52,7 @@ namespace TheatersIs.BusinessLayer.Services.AddressService
         {
             var address = _mapper.Map<Address>(addressDTO);
             address.Id = id;
-             _addressRepository.Update(address);
+            _addressRepository.Update(address);
             _addressRepository.Save();
 
             return _mapper.Map<AddressDTO>(address);

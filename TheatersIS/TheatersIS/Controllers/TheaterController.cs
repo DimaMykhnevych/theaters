@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TheatersIs.BusinessLayer.DTOs;
 using TheatersIs.BusinessLayer.Services.TheaterService;
@@ -35,7 +33,7 @@ namespace TheatersIS.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTheaterAndAddress([FromBody]TheaterDTO addTheaterDTO)
+        public IActionResult AddTheaterAndAddress([FromBody] TheaterDTO addTheaterDTO)
         {
             var added = _theaterService.AddTheater(addTheaterDTO);
             if (added == null)

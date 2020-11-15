@@ -8,9 +8,11 @@ using Microsoft.Extensions.Hosting;
 using TheatersIs.BusinessLayer.Mappers;
 using TheatersIs.BusinessLayer.Services.AddressService;
 using TheatersIs.BusinessLayer.Services.PerformanceService;
+using TheatersIs.BusinessLayer.Services.TheaterPerformanceService;
 using TheatersIs.BusinessLayer.Services.TheaterService;
 using TheatersIS.DataLayer.Builders.PerformanceN;
 using TheatersIS.DataLayer.Builders.TheaterN;
+using TheatersIS.DataLayer.Builders.TheaterPerformanceN;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Repositories.AddressRepositoryN;
 using TheatersIS.DataLayer.Repositories.OrderRepositoryN;
@@ -69,9 +71,11 @@ namespace TheatersIS
             services.AddTransient<ITheaterService, TheaterService>();
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IPerformanceService, PerformanceService>();
+            services.AddTransient<ITheaterPerformanceService, TheaterPerformanceService>();
 
             services.AddTransient<ITheaterSearchQueryBuilder, TheaterSearchQueryBuilder>();
             services.AddTransient<IPerformanceSearchQueryBuilder, PerformanceSearchQueryBuilder>();
+            services.AddTransient<ITheaterPerformanceQueryBuilder, TheaterPerformanceQueryBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TheatersIs.BusinessLayer.DTOs;
 using TheatersIS.DataLayer.Builders.PerformanceN;
@@ -24,7 +22,7 @@ namespace TheatersIs.BusinessLayer.Services.PerformanceService
             _query = query;
         }
 
-     
+
 
         public async Task<PerformanceDTO> GetPerformance(int id)
         {

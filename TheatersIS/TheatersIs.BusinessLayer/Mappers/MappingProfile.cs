@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheatersIs.BusinessLayer.DTOs;
 using TheatersIS.DataLayer.Entities;
 
@@ -15,6 +12,7 @@ namespace TheatersIs.BusinessLayer.Mappers
             CreateMap<Theater, TheaterDTO>().ReverseMap();
             CreateMap<Performance, PerformanceDTO>().ReverseMap();
             CreateMap<TheaterPerformance, TheaterPerformanceDTO>().ReverseMap();
+            CreateMap<TheaterPerformance, AddAndUpdateTheaterPerformanceDTO>().ReverseMap();
             CreateMap<Order, OrderDTO>().ReverseMap();
             CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<UserAnswer, UserAnswerDTO>().ReverseMap();

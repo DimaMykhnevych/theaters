@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TheatersIS.DataLayer.Entities;
+﻿using TheatersIS.DataLayer.Entities;
 
 namespace TheatersIS.DataLayer.Repositories.VariantRepositoryN
 {

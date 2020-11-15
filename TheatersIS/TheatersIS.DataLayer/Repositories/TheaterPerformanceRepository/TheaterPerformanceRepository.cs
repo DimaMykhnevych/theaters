@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 using TheatersIS.DataLayer.DbContextN;
 using TheatersIS.DataLayer.Entities;
 
@@ -10,5 +11,31 @@ namespace TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN
         ITheaterPerformanceRepository
     {
         public TheaterPerformanceRepository(TheaterDbContext context) : base(context) { }
+
+        public async Task<TheaterPerformance> GetTheaterPerformance(int id)
+        {
+            return Context.TheaterPerformances
+                .Include(tp => tp.Theater)
+                .Include(tp => tp.Performance)
+                .FirstOrDefault(tp => tp.Id == id);
+
+        }
+
+        public async Task<IEnumerable<TheaterPerformance>> GetTheaterPerformances()
+        {
+            return Context.TheaterPerformances
+                .Include(tp => tp.Theater)
+                .Include(tp => tp.Performance);
+        }
+
+        public async Task<TheaterPerformance> UpdateAsync(TheaterPerformance theaterPerformance)
+        {
+
+            Context.Update(theaterPerformance);
+            await Context.SaveChangesAsync();
+
+            return theaterPerformance;
+
+        }
     }
 }
