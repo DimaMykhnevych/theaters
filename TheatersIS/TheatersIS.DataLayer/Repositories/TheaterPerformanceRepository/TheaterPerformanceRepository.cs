@@ -25,7 +25,17 @@ namespace TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN
         {
             return Context.TheaterPerformances
                 .Include(tp => tp.Theater)
-                .Include(tp => tp.Performance);
+                .Include(tp => tp.Performance)
+                .ToList(); //!!!
+        }
+
+        public async Task<IEnumerable<TheaterPerformance>> GetTheaterPerformancesWithOrders()
+        {
+            return Context.TheaterPerformances
+                .Include(tp => tp.Theater)
+                .Include(tp => tp.Performance)
+                .Include(tp => tp.Orders)
+                .ToList();
         }
 
         public async Task<TheaterPerformance> UpdateAsync(TheaterPerformance theaterPerformance)

@@ -7,7 +7,10 @@ namespace TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN
     public interface ITheaterPerformanceRepository : IRepository<TheaterPerformance>
     {
         Task<IEnumerable<TheaterPerformance>> GetTheaterPerformances();
+
+        Task<IEnumerable<TheaterPerformance>> GetTheaterPerformancesWithOrders();
         Task<TheaterPerformance> GetTheaterPerformance(int id);
         Task<TheaterPerformance> UpdateAsync(TheaterPerformance theaterPerformance);
+
     }
 }

@@ -26,6 +26,15 @@ namespace TheatersIS.DataLayer.Builders.TheaterPerformanceN
             return this;
         }
 
+        public ITheaterPerformanceQueryBuilder SetBaseTheaterPerformanceWithOrders()
+        {
+            _query = _context.TheaterPerformances
+                .Include(tp => tp.Theater)
+                .Include(tp => tp.Performance)
+                .Include(tp => tp.Orders);
+            return this;
+        }
+
         public ITheaterPerformanceQueryBuilder SetPerformanceName(string name)
         {
             if (!string.IsNullOrEmpty(name))
@@ -103,6 +112,15 @@ namespace TheatersIS.DataLayer.Builders.TheaterPerformanceN
                         _query = descending ? _query.OrderByDescending(t => t.Performance.Name)
                             : _query.OrderBy(t => t.Performance.Name);
                         break;
+                    case "ticketprice":
+                        _query = descending ? _query.OrderByDescending(t => t.TicketPrice)
+                            : _query.OrderBy(t => t.TicketPrice);
+                        break;
+                    case "date":
+                        _query = descending ? _query.OrderByDescending(t => t.PerformanceDate)
+                           : _query.OrderBy(t => t.PerformanceDate);
+                        break;
+
                     default: break;
                 }
             }

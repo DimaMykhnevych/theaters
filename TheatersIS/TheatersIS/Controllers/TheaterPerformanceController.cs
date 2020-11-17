@@ -25,6 +25,90 @@ namespace TheatersIS.Controllers
             return Ok(performances);
         }
 
+        [HttpGet("attendanceTheaters")]
+        public async Task<IActionResult> GetTheaterAttendance()
+        {
+            IEnumerable<TheaterAttendanceDTO> res = 
+                await _theaterPerformanceService.GetTheaterPerformancesWithOrders();
+            return Ok(res);
+        }
+
+        [HttpGet("mostPopularTheaters")]
+        public async Task<IActionResult> GetMostPopularTheaters()
+        {
+            IEnumerable<TheaterAttendanceDTO> res =
+                await _theaterPerformanceService.GetMostPopularTheaters();
+            return Ok(res);
+        }
+
+        [HttpGet("mostUnpopularTheaters")]
+        public async Task<IActionResult> GetMostUnpopularTheaters()
+        {
+            IEnumerable<TheaterAttendanceDTO> res =
+                await _theaterPerformanceService.GetMostUnpopularTheaters();
+            return Ok(res);
+        }
+
+        [HttpGet("attendancePerformances")]
+        public async Task<IActionResult> GetPerformanceAttendance()
+        {
+            IEnumerable<PerformanceAttendanceDTO> res =
+                await _theaterPerformanceService.GetPerformanceAttendances();
+            return Ok(res);
+        }
+
+        [HttpGet("mostPopularPerformances")]
+        public async Task<IActionResult> GetMostPopularPerformances()
+        {
+            IEnumerable<PerformanceAttendanceDTO> res =
+                await _theaterPerformanceService.GetMostPopularPerformances();
+            return Ok(res);
+        }
+
+        [HttpGet("mostUnpopularPerformances")]
+        public async Task<IActionResult> GetMostUnpopularPerformances()
+        {
+            IEnumerable<PerformanceAttendanceDTO> res =
+                await _theaterPerformanceService.GetMostUnpopularPerformances();
+            return Ok(res);
+        }
+
+        [HttpGet("popularGenres")]
+        public async Task<IActionResult> GetPopularGenres()
+        {
+            IEnumerable<PopularGenresDTO> res =
+                await _theaterPerformanceService.GetPopularGenres();
+            return Ok(res);
+        }
+
+        [HttpGet("popularComposers")]
+        public async Task<IActionResult> GetPopularComposers()
+        {
+            IEnumerable<PopularComposersDTO> res =
+                await _theaterPerformanceService.GetPopularComposers();
+            return Ok(res);
+        }
+
+        [HttpGet("popularAuthors")]
+        public async Task<IActionResult> GetPopularAuthors()
+        {
+            IEnumerable<PopularAuthorsDTO> res =
+                await _theaterPerformanceService.GetPopularAuthors();
+            return Ok(res);
+        }
+
+        [HttpGet("ticketSales")]
+        public async Task<IActionResult> GetTisketSales
+            ([FromQuery] SearchTheaterPerformanceDTO parameters)
+        {
+            IEnumerable<TicketSalesDTO> res =
+                await _theaterPerformanceService.GetPeriodTicketSales(parameters);
+            return Ok(res);
+        }
+
+
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTheaterPerformance(int id)
         {
