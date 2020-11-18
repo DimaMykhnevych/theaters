@@ -34,11 +34,47 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
             return _mapper.Map<TheaterPerformanceDTO>(theaterPerformance);
         }
 
+        public async Task<IEnumerable<TheaterPerformanceDTO>> GetPerformancesByTheaterId(int id)
+        {
+            IEnumerable<TheaterPerformance> theaterPerformances =
+               await _theaterPerformanceRepository.GetTheaterPerformances();
+            IEnumerable<TheaterPerformance> result = theaterPerformances
+                .Where(tp => tp.TheaterId == id);
+            return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(result);
+        }
+
         public async Task<IEnumerable<TheaterPerformanceDTO>> GetTheaterPerformances()
         {
             IEnumerable<TheaterPerformance> theaterPerformances =
                 await _theaterPerformanceRepository.GetTheaterPerformances();
             return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(theaterPerformances);
+        }
+
+        public async Task<IEnumerable<TheaterPerformanceDTO>> GetActiveTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformance> theaterPerformances =
+                await _theaterPerformanceRepository.GetTheaterPerformances();
+            IEnumerable<TheaterPerformance> activePerformances =
+                theaterPerformances.Where(tp => tp.Performance.PerformanceStatus == PerformanceStatus.ok);
+            return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(activePerformances);
+        }
+
+        public async Task<IEnumerable<TheaterPerformanceDTO>> GetCanceledTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformance> theaterPerformances =
+               await _theaterPerformanceRepository.GetTheaterPerformances();
+            IEnumerable<TheaterPerformance> canceledPerformances =
+                theaterPerformances.Where(tp => tp.Performance.PerformanceStatus == PerformanceStatus.canceled);
+            return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(canceledPerformances);
+        }
+
+        public async Task<IEnumerable<TheaterPerformanceDTO>> GetPostponedTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformance> theaterPerformances =
+               await _theaterPerformanceRepository.GetTheaterPerformances();
+            IEnumerable<TheaterPerformance> posponedPerformances =
+                theaterPerformances.Where(tp => tp.Performance.PerformanceStatus == PerformanceStatus.postponed);
+            return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(posponedPerformances);
         }
 
         public async Task<IEnumerable<TheaterPerformanceDTO>> SearchTheaterPerformances
@@ -280,6 +316,6 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
             return performanceAttendances;
         }
 
-  
+   
     }
 }

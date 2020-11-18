@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace TheatersIs.BusinessLayer.DTOs
 {
-    public class OrderDTO
+    public class AllOrderInfoDTO
     {
         public int Id { get; set; }
 
@@ -15,8 +18,8 @@ namespace TheatersIs.BusinessLayer.DTOs
         [Required]
         public int TicketsAmount { get; set; }
 
-        //public UserDTO User { get; set; }
+        public UserDTO User { get; set; }
 
-        //public TheaterPerformanceDTO TheaterPerformance { get; set; }
+        public TheaterPerformanceDTO TheaterPerformance { get; set; }
     }
 }

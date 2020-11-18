@@ -38,6 +38,16 @@ namespace TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN
                 .ToList();
         }
 
+        public async Task<TheaterPerformance> GetTheaterPerformanceWithOrdersAndAddressById(int id)
+        {
+            return Context.TheaterPerformances
+                  .Include(tp => tp.Theater)
+                  .Include(tp => tp.Theater.Address)
+                  .Include(tp => tp.Performance)
+                  .Include(tp => tp.Orders)
+                  .FirstOrDefault(tp => tp.Id == id);
+        }
+
         public async Task<TheaterPerformance> UpdateAsync(TheaterPerformance theaterPerformance)
         {
 

@@ -8,6 +8,10 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
     {
         Task<IEnumerable<TheaterPerformanceDTO>> GetTheaterPerformances();
         Task<TheaterPerformanceDTO> GetTheaterPerformance(int id);
+        Task<IEnumerable<TheaterPerformanceDTO>> GetPerformancesByTheaterId(int id);
+        Task<IEnumerable<TheaterPerformanceDTO>> GetActiveTheaterPerformances();
+        Task<IEnumerable<TheaterPerformanceDTO>> GetCanceledTheaterPerformances();
+        Task<IEnumerable<TheaterPerformanceDTO>> GetPostponedTheaterPerformances();
 
         Task<IEnumerable<TheaterAttendanceDTO>> GetTheaterPerformancesWithOrders();
         Task<IEnumerable<TheaterAttendanceDTO>> GetMostPopularTheaters();

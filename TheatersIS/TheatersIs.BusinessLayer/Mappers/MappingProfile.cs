@@ -14,6 +14,7 @@ namespace TheatersIs.BusinessLayer.Mappers
             CreateMap<TheaterPerformance, TheaterPerformanceDTO>().ReverseMap();
             CreateMap<TheaterPerformance, AddAndUpdateTheaterPerformanceDTO>().ReverseMap();
             CreateMap<Order, OrderDTO>().ReverseMap();
+            CreateMap<AllOrderInfoDTO, Order>().ReverseMap();
             CreateMap<Question, QuestionDTO>().ReverseMap();
             CreateMap<UserAnswer, UserAnswerDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();

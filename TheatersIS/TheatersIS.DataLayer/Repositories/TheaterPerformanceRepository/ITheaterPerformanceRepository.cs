@@ -9,6 +9,7 @@ namespace TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN
         Task<IEnumerable<TheaterPerformance>> GetTheaterPerformances();
 
         Task<IEnumerable<TheaterPerformance>> GetTheaterPerformancesWithOrders();
+        Task<TheaterPerformance> GetTheaterPerformanceWithOrdersAndAddressById(int id);
         Task<TheaterPerformance> GetTheaterPerformance(int id);
         Task<TheaterPerformance> UpdateAsync(TheaterPerformance theaterPerformance);
 

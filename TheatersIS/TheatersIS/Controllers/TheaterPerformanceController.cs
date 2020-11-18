@@ -107,6 +107,29 @@ namespace TheatersIS.Controllers
         }
 
 
+        [HttpGet("activeTheaterPerformances")]
+        public async Task<IActionResult> GetActiveTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformanceDTO> active =
+                await _theaterPerformanceService.GetActiveTheaterPerformances();
+            return Ok(active);
+        }
+
+        [HttpGet("canceledTheaterPerformances")]
+        public async Task<IActionResult> GetCanceledTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformanceDTO> canceled =
+                await _theaterPerformanceService.GetCanceledTheaterPerformances();
+            return Ok(canceled);
+        }
+
+        [HttpGet("postponedTheaterPerformances")]
+        public async Task<IActionResult> GetPostponedTheaterPerformances()
+        {
+            IEnumerable<TheaterPerformanceDTO> postponed =
+                await _theaterPerformanceService.GetPostponedTheaterPerformances();
+            return Ok(postponed);
+        }
 
 
         [HttpGet("{id}")]
@@ -117,6 +140,14 @@ namespace TheatersIS.Controllers
             if (theaterPerformance == null)
                 return NotFound();
             return Ok(theaterPerformance);
+        }
+
+        [HttpGet("performanceByTheater/{id}")]
+        public async Task<IActionResult> GetPerformancesByTheaterId(int id)
+        {
+            IEnumerable<TheaterPerformanceDTO> tp =
+                await _theaterPerformanceService.GetPerformancesByTheaterId(id);
+            return Ok(tp);
         }
 
         [HttpPost]

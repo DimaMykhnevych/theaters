@@ -7,9 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheatersIs.BusinessLayer.Mappers;
 using TheatersIs.BusinessLayer.Services.AddressService;
+using TheatersIs.BusinessLayer.Services.EmailService;
+using TheatersIs.BusinessLayer.Services.OrderService;
 using TheatersIs.BusinessLayer.Services.PerformanceService;
 using TheatersIs.BusinessLayer.Services.TheaterPerformanceService;
 using TheatersIs.BusinessLayer.Services.TheaterService;
+using TheatersIs.BusinessLayer.Services.UserService;
 using TheatersIS.DataLayer.Builders.PerformanceN;
 using TheatersIS.DataLayer.Builders.TheaterN;
 using TheatersIS.DataLayer.Builders.TheaterPerformanceN;
@@ -72,6 +75,9 @@ namespace TheatersIS
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IPerformanceService, PerformanceService>();
             services.AddTransient<ITheaterPerformanceService, TheaterPerformanceService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             services.AddTransient<ITheaterSearchQueryBuilder, TheaterSearchQueryBuilder>();
             services.AddTransient<IPerformanceSearchQueryBuilder, PerformanceSearchQueryBuilder>();

@@ -19,8 +19,8 @@ namespace TheatersIs.BusinessLayer.DTOs
 
         public string TelephoneNumber { get; set; }
 
-        public List<OrderDTO> Orders { get; set; }
+        //public List<OrderDTO> Orders { get; set; }
 
-        public List<UserAnswerDTO> UserAnswers { get; set; }
+        //public List<UserAnswerDTO> UserAnswers { get; set; }
     }
 }
