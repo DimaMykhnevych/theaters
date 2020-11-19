@@ -10,6 +10,6 @@ namespace TheatersIs.BusinessLayer.DTOs
 
         public string VariantText { get; set; }
 
-        public List<UserAnswerDTO> UserAnswers { get; set; }
+        //public List<UserAnswerDTO> UserAnswers { get; set; }
     }
 }

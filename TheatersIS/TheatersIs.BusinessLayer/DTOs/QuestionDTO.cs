@@ -11,6 +11,6 @@ namespace TheatersIs.BusinessLayer.DTOs
         [Required]
         public string Text { get; set; }
 
-        public List<VariantDTO> Variants { get; set; }
+        //public List<VariantDTO> Variants { get; set; }
     }
 }

@@ -13,8 +13,8 @@ namespace TheatersIs.BusinessLayer.DTOs
         public int VariantId { get; set; }
 
 
-        public UserDTO User { get; set; }
+        //public UserDTO User { get; set; }
 
-        public VariantDTO Variant { get; set; }
+        //public VariantDTO Variant { get; set; }
     }
 }

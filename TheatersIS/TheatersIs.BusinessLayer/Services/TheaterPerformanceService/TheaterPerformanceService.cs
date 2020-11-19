@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheatersIs.BusinessLayer.DTOs;
+using TheatersIs.BusinessLayer.Mappers;
+using TheatersIs.BusinessLayer.Services.EmailService;
 using TheatersIS.DataLayer.Builders.TheaterPerformanceN;
 using TheatersIS.DataLayer.Entities;
 using TheatersIS.DataLayer.Repositories.TheaterPerformanceRepositoryN;
+using TheatersIS.DataLayer.Repositories.UserAnswerRepositoryN;
+using TheatersIS.DataLayer.Repositories.UserRepositoryN;
 
 namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
 {
@@ -14,13 +18,22 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
         private readonly IMapper _mapper;
         private readonly ITheaterPerformanceRepository _theaterPerformanceRepository;
         private readonly ITheaterPerformanceQueryBuilder _query;
+        private readonly IUserAnswerRepository _userAnswerRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IEmailService _emailService;
 
         public TheaterPerformanceService(IMapper mapper,
             ITheaterPerformanceRepository theaterPerformanceRepository,
-            ITheaterPerformanceQueryBuilder theaterPerformanceQueryBuilder)
+            IUserAnswerRepository userAnswerRepository,
+            IUserRepository userRepository,
+            ITheaterPerformanceQueryBuilder theaterPerformanceQueryBuilder,
+            IEmailService emailService)
         {
             _mapper = mapper;
             _theaterPerformanceRepository = theaterPerformanceRepository;
+            _userAnswerRepository = userAnswerRepository;
+            _userRepository = userRepository;
+            _emailService = emailService;
             _query = theaterPerformanceQueryBuilder;
 
         }
@@ -39,7 +52,7 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
             IEnumerable<TheaterPerformance> theaterPerformances =
                await _theaterPerformanceRepository.GetTheaterPerformances();
             IEnumerable<TheaterPerformance> result = theaterPerformances
-                .Where(tp => tp.TheaterId == id);
+                .Where(tp => tp.TheaterId == id && tp.Performance.PerformanceStatus == PerformanceStatus.ok);
             return _mapper.Map<IEnumerable<TheaterPerformanceDTO>>(result);
         }
 
@@ -128,6 +141,14 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
 
             _theaterPerformanceRepository.Insert(theaterPerformance);
             _theaterPerformanceRepository.Save();
+
+
+            TheaterPerformance addedTheaterPerformance =
+                await _theaterPerformanceRepository.GetTheaterPerformance(theaterPerformance.Id);
+            IEnumerable<User> usersToSendEmail =  await GetUsersToSentEmail(addedTheaterPerformance);
+
+            await _emailService.SendNewPerformanceEmail(_mapper.Map<IEnumerable<UserDTO>>(usersToSendEmail),
+                _mapper.Map<TheaterPerformanceDTO>(addedTheaterPerformance));
 
 
             return _mapper.Map<AddAndUpdateTheaterPerformanceDTO>(theaterPerformance);
@@ -316,6 +337,61 @@ namespace TheatersIs.BusinessLayer.Services.TheaterPerformanceService
             return performanceAttendances;
         }
 
+
+        private async Task<IEnumerable<User>> GetUsersToSentEmail( TheaterPerformance theaterPerformance)
+        {
+            List<User> usersToSendEmails = new List<User>();
+            bool needToSendEmail = false;
+            IEnumerable<UserAnswer> userAnswers = await _userAnswerRepository.GetUserAnswersWithVariants();
+            IEnumerable<IGrouping<int, UserAnswer>> groupedUserAnswers =
+                userAnswers.GroupBy(ans => ans.UserId);
+             
+            foreach(var key in groupedUserAnswers)
+            {
+                needToSendEmail = false;
+                foreach (var ans in key)
+                {
+                    switch (ans.Variant.QuestionId)
+                    {
+                        case 1:
+                            if(PerformanceGenreMapper.GetPerformanceGenre(ans.Variant.VariantText)
+                                == theaterPerformance.Performance.PerformanceGenre)
+                            {
+                                needToSendEmail = true;
+                            }
+                            break;
+                        case 2:
+                            if(ans.Variant.VariantText.ToLower() == theaterPerformance.Performance.Author?.ToLower())
+                            {
+                                needToSendEmail = true;
+                            }
+                            break;
+                        case 3:
+                            if (ans.Variant.VariantText.ToLower() == theaterPerformance.Performance.Composer?.ToLower())
+                            {
+                                needToSendEmail = true;
+                            }
+                            break;
+                        case 4:
+                            if(TheaterTypeMapper.GetTheaterType(ans.Variant.VariantText)
+                                == theaterPerformance.Theater.TheaterType)
+                            {
+                                needToSendEmail = true;
+                            }
+                            break;
+
+                    }
+                }
+                if (needToSendEmail)
+                {
+                    usersToSendEmails.Add(_userRepository.Get(key.Key));
+                }
+            }
+
+
+
+            return usersToSendEmails;
+        }
    
     }
 }

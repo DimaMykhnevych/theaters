@@ -10,9 +10,12 @@ using TheatersIs.BusinessLayer.Services.AddressService;
 using TheatersIs.BusinessLayer.Services.EmailService;
 using TheatersIs.BusinessLayer.Services.OrderService;
 using TheatersIs.BusinessLayer.Services.PerformanceService;
+using TheatersIs.BusinessLayer.Services.QuestionService;
 using TheatersIs.BusinessLayer.Services.TheaterPerformanceService;
 using TheatersIs.BusinessLayer.Services.TheaterService;
+using TheatersIs.BusinessLayer.Services.UserAnswerService;
 using TheatersIs.BusinessLayer.Services.UserService;
+using TheatersIs.BusinessLayer.Services.VariantService;
 using TheatersIS.DataLayer.Builders.PerformanceN;
 using TheatersIS.DataLayer.Builders.TheaterN;
 using TheatersIS.DataLayer.Builders.TheaterPerformanceN;
@@ -78,6 +81,9 @@ namespace TheatersIS
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IQuestionService, QuestionService>();
+            services.AddTransient<IVariantService, VariantService>();
+            services.AddTransient<IUserAnswerService, UserAnswerService>();
 
             services.AddTransient<ITheaterSearchQueryBuilder, TheaterSearchQueryBuilder>();
             services.AddTransient<IPerformanceSearchQueryBuilder, PerformanceSearchQueryBuilder>();
